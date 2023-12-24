@@ -1,29 +1,20 @@
-# REST API FOR CRUD OPERATIONS
+# REST API and HTTP PROTOCOL FOR implementing CRUD OPERATIONS
 
-This is a project made in order to apply topics I've been learning recently about building REST APIs with JavaScript and Node.js.
-In my project,using REST API, I implemented CRUD operations on Mongodb database collection by sending an HTTP requests to the server. (See the schema that defines my database structure in 'mongoose_model' folder).
-In my project the server is local.
+# Project's objectives
 
+phase 1:
+- learn and implement REST API and HTTP protocol
+- getting familiar with backend technologies like Node and Express
+- getting familiar with persistency and basic querying using MongoDb and Mongoose
+- using package management technologies like NPM 
+- learn testing tools like Postman 
+- all the while practicing version control with git
 
-# Technologies used
-
--Node.js
--Express.js
--MongoDB
--Mongoose
--Postman
-
-
-# Prerequisites
-
-For using my project, ensure you have met the following requirements:
-
-1. Node.js and npm 
-2. Express.js - Node.js web application framework.
-3. Mongoose - Object Mapping between Node and MongoDB managed via Mongoose.
-4. git - Clone the project repository.
-5. Text editor or IDE - View the project's source code. 
-6. Postman - Test and interact with the API endpoints.
+phase 2:
+- using more complex data , for more complex querying 
+- basic auth using jwt 
+- basic CI 
+- using containers with docker 
 
 
 # Installation
@@ -81,7 +72,7 @@ Database connected
 		
 Example (on Postman):	
 ```
-POST https://localhost:5000/api/create
+POST http://localhost:5000/api/create
 ```
 Required body params: 
  `name=[string]`
@@ -96,7 +87,7 @@ It's also generating a unique ID for the new user.
 		
 Example (on Postman):	
 ```
-GET https://localhost:5000/api/getAll
+GET http://localhost:5000/api/getAll
 ```
 
 #### Retrieve specific user data (based on ID) from MongoDB:
@@ -105,7 +96,7 @@ GET https://localhost:5000/api/getAll
 		
 Example (on Postman):	
 ```
-GET https://localhost:5000/api/getByID/<id>
+GET http://localhost:5000/api/getByID/<id>
 ```
 
 #### Update specific user data (based on ID) from MongoDB:
@@ -114,7 +105,7 @@ GET https://localhost:5000/api/getByID/<id>
 		
 Example (on Postman):	
 ```
-PATCH https://localhost:5000/api/updateByID/<id>
+PATCH http://localhost:5000/api/updateByID/<id>
 ```
 Required body params(new data): 
  `name=[string]`
@@ -127,7 +118,7 @@ Required body params(new data):
 		
 Example (on Postman):	
 ```
-DELETE https://localhost:5000/api/deleteByID/<id>
+DELETE http://localhost:5000/api/deleteByID/<id>
 ```
 
 # Additional Note:
