@@ -4,6 +4,11 @@ const routerMod = expressMod.Router();
 
 const userModel = require('../mongoose_model/user');
 
+const authMod = require('../authentication');
+
+////signup the route
+routerMod.post('/signup',authMod.signup);
+
 //create data to database(POST htpp request)
 routerMod.post('/post', async (req, res) => {
     const user = new userModel(
