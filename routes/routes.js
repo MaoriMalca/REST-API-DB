@@ -6,8 +6,16 @@ const userModel = require('../mongoose_model/user');
 
 const authMod = require('../authentication');
 
-////signup the route
-routerMod.post('/signup',authMod.signup);
+//signup the route
+routerMod.post('/signup', authMod.signup);
+
+//signin the route
+routerMod.post('/signin', authMod.signin);
+
+routerMod.get('/testAuthRoute', authMod.isSignedIn, (req, res) => {
+    res.send("A protected route");
+    res.json(req.auth);
+});
 
 //create data to database(POST htpp request)
 routerMod.post('/post', async (req, res) => {

@@ -6,8 +6,13 @@ const mongooseMod = require('mongoose');
 
 const mongoString = process.env.DATABASE_URL;
 
+const { isSignedIn } = require('./authentication');
+
 //DB connection
-mongooseMod.connect(mongoString);
+mongooseMod.connect(mongoString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true  
+});
 
 const database = mongooseMod.connection;
 
@@ -24,6 +29,9 @@ const expressApp = expressMod();
 expressApp.use(expressMod.json());
 
 const routerMod = require('./routes/routes');
+
+//Apply isSignedIn middleware globally
+expressApp.use(isSignedIn);
 
 //Route Prefix
 expressApp.use('/api', routerMod);
