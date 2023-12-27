@@ -21,7 +21,7 @@ routerMod.post('/signup', authMod.signup);
 routerMod.post('/signin', authMod.signin);
 
 // Apply isSignedIn middleware to all routes below this line
-//routerMod.use(isSignedIn);
+routerMod.use(isSignedIn);
 
 // Create data to database(POST htpp request) without auth
 routerMod.post('/post', async (req, res) => {
