@@ -5,6 +5,7 @@ const dataSchema = new mongooseMod.Schema({
     password: { type: String, required: true },
     name: { type: String, required: true },
     age: { type: Number, required: true },
+    city: { type: String, required: true },
     token: { type: String }
 });
 

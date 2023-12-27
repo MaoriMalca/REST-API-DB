@@ -8,29 +8,30 @@ const authMod = require('../authentication');
 
 const { isSignedIn } = require('../authentication');
 
-//create data to database(POST htpp request) and register to api 
+const axiosMod = require('axios');
+
+const WEATHER_API_KEY = 'e3594dbdc5e14acc9b3150924232712';
+
+// API endpoints
+
+// Create data to database(POST htpp request) and register to api 
 routerMod.post('/signup', authMod.signup);
 
-//create data to database(POST htpp request) without auth
+// Signin to api after register (recieve token for authorization)
 routerMod.post('/signin', authMod.signin);
 
-//testing specific protected route
-routerMod.get('/testAuthRoute', authMod.isSignedIn, (req, res) => {
-    res.send("A protected route");
-    res.json(req.auth);
-});
+// Apply isSignedIn middleware to all routes below this line
+//routerMod.use(isSignedIn);
 
-//Apply isSignedIn middleware to all routes below this line
-routerMod.use(isSignedIn);
-
-//create data to database(POST htpp request) without auth
+// Create data to database(POST htpp request) without auth
 routerMod.post('/post', async (req, res) => {
     const user = new userModel(
         {
             email: req.body.email,
             password: req.body.password,
             name: req.body.name,
-            age: req.body.age
+            age: req.body.age,
+            city: req.body.city
         });
 
     try {
@@ -43,7 +44,7 @@ routerMod.post('/post', async (req, res) => {
     }
 });
 
-//read all data from database(GET htpp request)
+//Read all data from database(GET htpp request)
 routerMod.get('/getAll', async (req, res) => {
     try {
         const usersData = await userModel.find();
@@ -55,7 +56,7 @@ routerMod.get('/getAll', async (req, res) => {
     }
 });
 
-//read data from database by id(GET htpp request)
+// Read data from database by id(GET htpp request)
 routerMod.get('/getByID/:id', async (req, res) => {
     try {
         const userData = await userModel.findById(req.params.id);
@@ -67,7 +68,32 @@ routerMod.get('/getByID/:id', async (req, res) => {
     }
 });
 
-//update data in database by id(PUT htpp request)
+// Read specific user's city weather - by id(GET htpp request)
+routerMod.get('/getWeatherByID/:id', async (req, res) => {
+    try {
+        const userData = await userModel.findById(req.params.id); 
+        // Make a GET request to the external weather API
+        const response = await axiosMod.get(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${userData.city}`);
+        // Extract relevant data from the response
+        const weatherData = {
+            temperature: response.data.current.temp_c,
+            condition: response.data.current.condition.text,
+        };
+        res.status(200).json(
+            {
+                'city': userData.city,
+                'temperature': weatherData.temperature,
+                'message': weatherData.condition
+            });
+        }
+
+        catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+});
+
+// Update data in database by id(PUT htpp request)
+// if update email or password - must regsiter again
 routerMod.patch('/updateByID/:id', async (req, res) => {
     try {
         const userToUpdt = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -78,11 +104,11 @@ routerMod.patch('/updateByID/:id', async (req, res) => {
     }
 });
 
-//delete data from database by id(DELETE htpp request)
+// Delete data from database by id(DELETE htpp request)
 routerMod.delete('/deleteByID/:id', async (req, res) => {
     try {
         const userToDel = await userModel.findByIdAndDelete(req.params.id);
-        res.send(`Document with ${userToDel.name} has been deleted`);
+        res.status(200).send(`Document with ${userToDel.name} has been deleted`);
     }
 
     catch (error) {

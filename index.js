@@ -1,12 +1,10 @@
-require('dotenv').config();
-
-const expressMod = require('express');
-
 const mongooseMod = require('mongoose');
+
+require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL;
 
-//DB connection
+// DB connection
 mongooseMod.connect(mongoString, {
     useNewUrlParser: true,
     useUnifiedTopology: true  
@@ -22,16 +20,18 @@ database.once('connected', () => {
     console.log('Database Connected');
 });
 
+// Creating an Express server
+const expressMod = require('express');
+
+const routerMod = require('./routes/routes');
+
 const expressApp = expressMod();
 
 expressApp.use(expressMod.json());
 
-const routerMod = require('./routes/routes');
-
-//Route Prefix
-expressApp.use('/api', routerMod);
+expressApp.use('/api', routerMod); //Route Prefix
 
 expressApp.listen(5000, () => {
-    console.log("Server is running on port 5000");
+    console.log('Server is running on port 5000');
 });
 
