@@ -1,4 +1,4 @@
-const authModel = require('./mongoose_model/auth');
+const userModel = require('./mongoose_model/user');
 
 const jwtMod = require('jsonwebtoken');
 
@@ -10,23 +10,23 @@ require('cookie-parser');
 
 require('dotenv').config();
 
-const secret_key = process.env.JWT_SECRET;
+const secretKey = process.env.JWT_SECRET;
 
 exports.isSignedIn = expressJwtMod({
-    secret: secret_key,
+    secret: secretKey,
     userProperty: 'auth',
     algorithms: ['HS256'],
 });
 
 exports.signup = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, name, age } = req.body;
 
         if (!(email && password)) {
             res.status(400).send("All input is required");
         }
 
-        const existUser = await authModel.findOne({ email });
+        const existUser = await userModel.findOne({ email });
 
         if (existUser) {
             return res.status(409).json("User already exist, please login");
@@ -34,8 +34,8 @@ exports.signup = async (req, res) => {
 
         const encryptedPassword = await bcryptMod.hash(password, 10);
 
-        const userAuth = await authModel.create({
-            email, password: encryptedPassword
+        const userAuth = await userModel.create({
+            email, password: encryptedPassword, name, age
         })
 
         res.status(200).json(userAuth);
@@ -52,7 +52,7 @@ exports.signin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await authModel.findOne({ email });
+        const user = await userModel.findOne({ email });
 
         if (!user) {
             return res.json({ status: "error", error: "Invalid username/password" })
@@ -64,7 +64,7 @@ exports.signin = async (req, res) => {
             const token = jwtMod.sign({
                 id: user._id,
                 email: user.email
-            }, secret_key
+            }, secretKey
                 , {
                     expiresIn: 86400 // expires in 24 hours
                 })

@@ -6,8 +6,6 @@ const mongooseMod = require('mongoose');
 
 const mongoString = process.env.DATABASE_URL;
 
-const { isSignedIn } = require('./authentication');
-
 //DB connection
 mongooseMod.connect(mongoString, {
     useNewUrlParser: true,
@@ -30,12 +28,10 @@ expressApp.use(expressMod.json());
 
 const routerMod = require('./routes/routes');
 
-//Apply isSignedIn middleware globally
-expressApp.use(isSignedIn);
-
 //Route Prefix
 expressApp.use('/api', routerMod);
 
 expressApp.listen(5000, () => {
     console.log("Server is running on port 5000");
 });
+

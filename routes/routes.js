@@ -6,21 +6,29 @@ const userModel = require('../mongoose_model/user');
 
 const authMod = require('../authentication');
 
-//signup the route
+const { isSignedIn } = require('../authentication');
+
+//create data to database(POST htpp request) and register to api 
 routerMod.post('/signup', authMod.signup);
 
-//signin the route
+//create data to database(POST htpp request) without auth
 routerMod.post('/signin', authMod.signin);
 
+//testing specific protected route
 routerMod.get('/testAuthRoute', authMod.isSignedIn, (req, res) => {
     res.send("A protected route");
     res.json(req.auth);
 });
 
-//create data to database(POST htpp request)
+//Apply isSignedIn middleware to all routes below this line
+routerMod.use(isSignedIn);
+
+//create data to database(POST htpp request) without auth
 routerMod.post('/post', async (req, res) => {
     const user = new userModel(
         {
+            email: req.body.email,
+            password: req.body.password,
             name: req.body.name,
             age: req.body.age
         });
