@@ -4,9 +4,9 @@ const routerMod = expressMod.Router();
 
 const userModel = require('../mongoose_model/user');
 
-const authMod = require('../authentication');
+const authMod = require('../auth');
 
-const { isSignedIn } = require('../authentication');
+const { isSignedIn } = require('../auth');
 
 const axiosMod = require('axios');
 
