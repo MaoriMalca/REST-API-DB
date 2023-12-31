@@ -8,6 +8,8 @@ const authMod = require('../auth');
 
 const { isSignedIn } = require('../auth');
 
+const { IsAdmin } = require('../auth');
+
 const axiosMod = require('axios');
 
 const WEATHER_API_KEY = 'e3594dbdc5e14acc9b3150924232712';
@@ -31,7 +33,8 @@ routerMod.post('/post', async (req, res) => {
             password: req.body.password,
             name: req.body.name,
             age: req.body.age,
-            city: req.body.city
+            city: req.body.city,
+            role: req.body.role
         });
 
     try {
@@ -104,8 +107,8 @@ routerMod.patch('/updateByID/:id', async (req, res) => {
     }
 });
 
-// Delete data from database by id(DELETE htpp request)
-routerMod.delete('/deleteByID/:id', async (req, res) => {
+// Delete data from database by id(DELETE htpp request) - only 'admin' users can delete
+routerMod.delete('/deleteByID/:id', authMod.IsAdmin, async (req, res) => {
     try {
         const userToDel = await userModel.findByIdAndDelete(req.params.id);
         res.status(200).send(`Document with ${userToDel.name} has been deleted`);
@@ -116,4 +119,4 @@ routerMod.delete('/deleteByID/:id', async (req, res) => {
     }
 });
 
-module.exports = routerMod;
+module.exports = routerMod; 

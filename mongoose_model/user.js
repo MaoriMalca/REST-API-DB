@@ -6,6 +6,7 @@ const dataSchema = new mongooseMod.Schema({
     name: { type: String, required: true },
     age: { type: Number, required: true },
     city: { type: String, required: true },
+    role : {type: String, enum: ['admin', 'user'], default: 'user', required: true },
     token: { type: String }
 });
 
