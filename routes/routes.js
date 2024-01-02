@@ -8,7 +8,7 @@ const authMod = require('../auth');
 
 const { isSignedIn } = require('../auth');
 
-const { IsAdmin } = require('../auth');
+//const { IsAdmin } = require('../auth');
 
 const axiosMod = require('axios');
 

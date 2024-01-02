@@ -51,7 +51,7 @@ exports.signin = async (req, res) => {
         const user = await userModel.findOne({ email });
 
         if (!user) {
-            return res.status(400).send('Invalid username/password');
+            return res.status(400).send('Invalid email or password');
         }
 
         const passwordCompare = await bcryptMod.compare(password, user.password);
@@ -85,6 +85,6 @@ exports.IsAdmin = (req, res, next) => {
         next();
     } else {
         // User does not have the required role
-        res.status(403).json({ error: 'Forbidden: only admine can delete users' });
+        res.status(403).json({ error: 'Forbidden - only admine can delete users' });
     }
 };

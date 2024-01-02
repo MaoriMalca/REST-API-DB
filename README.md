@@ -81,6 +81,7 @@ Required body params:
  `name=[string]`
  `age=[number]`
  `city=[number]`
+ `role=[string]` enum: ['admin', 'user'], default: 'user'
 
 It's also generating a unique ID for the new user.
 
