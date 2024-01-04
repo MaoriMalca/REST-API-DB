@@ -9,13 +9,15 @@ phase 1:
 - using package management technologies like NPM 
 - basic auth using jwt 
 - learn testing tools like Postman 
+- combine an external APIs using Axios lib
+- using containers with docker 
 - all the while practicing version control with git
 
 phase 2:
 - using more complex data , for more complex querying 
-- roles using jwt 
+- roles using jwt
 - basic CI 
-- using containers with docker 
+
 
 
 # Installation
