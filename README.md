@@ -5,7 +5,7 @@
 phase 1:
 - learn and implement REST API and HTTP protocol
 - getting familiar with backend technologies like Node and Express
-- getting familiar with persistency and basic querying using mySQL and phpMyasmin
+- getting familiar with persistency and basic querying using mySQL and phpMyAdmin
 - using package management technologies like NPM 
 - learn testing tools like Postman 
 - combine an external APIs using Axios lib
@@ -55,6 +55,7 @@ GET http://localhost:5000/api/getByEmail/<email>
 Example (on Postman):	
 ```
 GET http://localhost:5000/api/getWeatherByEmail/<email>
+```
 
 #### Update specific user data (based on email) from mySQL:
 
