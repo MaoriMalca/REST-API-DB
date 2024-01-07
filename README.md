@@ -5,105 +5,18 @@
 phase 1:
 - learn and implement REST API and HTTP protocol
 - getting familiar with backend technologies like Node and Express
-- getting familiar with persistency and basic querying using MongoDb and Mongoose
+- getting familiar with persistency and basic querying using mySQL and phpMyasmin
 - using package management technologies like NPM 
-- basic auth using jwt 
 - learn testing tools like Postman 
 - combine an external APIs using Axios lib
-- using containers with docker 
 - all the while practicing version control with git
-
-phase 2:
-- using more complex data , for more complex querying 
-- roles using jwt
-- basic CI 
-
-
-
-# Installation
-
-Clone the repository:
-```
-git clone https://github.com/MaoriMalca/MaoriMalca/REST-API-MongoDB.git
-```
-Navigate to the project directory:
-```
-cd REST-API-MongoDB
-```
-Install dependencies:
-```
-npm install
-```
-
-# Set up MongoDB
-
-Start your MongoDB server.
-
-Configure environment:
-
-1.  See `.env.example` file from 'example' folder.
-2.  Create a new environment file by copying and pasting the example file. 
-    ```
-    cp .env.example .env
-    ```
-3.  Change the values of the file according the example file instructions.
-
 
 # Usage
 
-### Runnig the server:
-
-start the sever:
-```
-npm start
-```
-If the server is running successfully, you will get the following output:
-
-```
-Server is running on port 5000
-Database connected
-``````
-
-### Connect to the client API using Postman on port 5000.
-
-
 # API endpoints:
 
-#### Add new collection of user data to MongoDB and register to api:
 
-```POST/api/signup ```
-
-Example (on Postman):	
-```
-POST http://localhost:5000/api/signup
-```
-Required body params: 
- `email=[string]`
- `password=[number]`
- `name=[string]`
- `age=[number]`
- `city=[number]`
-
-It's also generating a unique ID for the new user.
-
-#### Signin to api after register:
-
-```POST/api/signin ```
-
-Example (on Postman):
-```
-POST http://localhost:5000/api/signin
-```
-Required body params: 
- `email=[string]`
- `password=[number]`
-
-You will get token for authorization, save it.
-
-
-For the following endpoints you need to insert your token to header request (filed 'Authorization'):
-
-#### Add new collection of user data to MongoDB:
+#### Add new collection of user data to mySQL:
 
 ```POST/api/create ```
 		
@@ -112,12 +25,13 @@ Example (on Postman):
 POST http://localhost:5000/api/create
 ```
 Required body params: 
+ `email=[string]`
+ `password=[string]`
  `name=[string]`
  `age=[number]`
+ `city=[string]`
 
-It's also generating a unique ID for the new user.
-
-#### Retrieve all the users data from MongoDB:
+#### Retrieve all the users data from mySQL:
 
 ```GET/api/getAll ```
 		
@@ -126,47 +40,42 @@ Example (on Postman):
 GET http://localhost:5000/api/getAll
 ```
 
-#### Retrieve specific user data (based on ID) from MongoDB:
+#### Retrieve specific user data (based on email) from mySQL:
 
-```GET/api/getByID/:id ```
+```GET/api/getByEmail/:email ```
 		
 Example (on Postman):	
 ```
-GET http://localhost:5000/api/getByID/<id>
+GET http://localhost:5000/api/getByEmail/<email>
 ```
-#### Retrieve specific user city weather (based on ID) from MongoDB:
+#### Retrieve specific user's city weather (based on email) from mySQL:
 
-```GET/api/getWeatherByID/:id ```
+```GET/api/getWeatherByEmail/:email ```
 		
 Example (on Postman):	
 ```
-GET http://localhost:5000/api/getWeatherByID/<id>
+GET http://localhost:5000/api/getWeatherByEmail/<email>
 
-#### Update specific user data (based on ID) from MongoDB:
+#### Update specific user data (based on email) from mySQL:
 
-```PATCH/api/updateByID/:id ```
+```PUT/api/updateByEmail/:email ```
 		
 Example (on Postman):	
 ```
-PATCH http://localhost:5000/api/updateByID/<id>
+PUT http://localhost:5000/api/updateByEmail/<email>
 ```
 Required body params(new data): 
+ `email=[string]`
+ `password=[string]`
  `name=[string]`
  `age=[number]`
+ `city=[string]`
 
-#### Delete specific user data (based on ID) from MongoDB:
+#### Delete specific user data (based on email) from mySQL:
 
-```DELETE/api/deleteByID/:id ```
+```DELETE/api/deleteByEmail/:email ```
 		
 Example (on Postman):	
 ```
-DELETE http://localhost:5000/api/deleteByID/<id>
+DELETE http://localhost:5000/api/deleteByEmail/<email>
 ```
-
-
-# Additional Note:
-
-1. Ensure that MongoDB is running before starting the server.
-2. Customize the data model and routes according to your application's requirements.
-
-

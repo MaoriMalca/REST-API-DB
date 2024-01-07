@@ -13,7 +13,7 @@ require('dotenv').config();
 // API endpoints
 
 // Create data to database(POST htpp request) 
-routerMod.post('/post', async (req, res) => {
+routerMod.post('/create', async (req, res) => {
     try {
         const { email, password, name, age, city } = req.body;
 
