@@ -23,11 +23,11 @@ phase 2:
 
 Clone the repository:
 ```
-git clone https://github.com/MaoriMalca/MaoriMalca/REST-API-MongoDB.git
+git clone https://github.com/MaoriMalca/MaoriMalca/REST-API-DB.git
 ```
 Navigate to the project directory:
 ```
-cd REST-API-MongoDB
+cd REST-API-DB
 ```
 Install dependencies:
 ```

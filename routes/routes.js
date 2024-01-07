@@ -26,7 +26,7 @@ routerMod.post('/signin', authMod.signin);
 routerMod.use(isSignedIn);
 
 // Create data to database(POST htpp request) without auth
-routerMod.post('/post', async (req, res) => {
+routerMod.post('/create', async (req, res) => {
     const user = new userModel(
         {
             email: req.body.email,
@@ -95,7 +95,7 @@ routerMod.get('/getWeatherByID/:id', async (req, res) => {
         }
 });
 
-// Update data in database by id(PUT htpp request)
+// Update data in database by id(PATCH htpp request)
 // if update email or password - must regsiter again
 routerMod.patch('/updateByID/:id', async (req, res) => {
     try {
