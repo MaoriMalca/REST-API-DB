@@ -141,6 +141,7 @@ GET http://localhost:5000/api/getByID/<id>
 Example (on Postman):	
 ```
 GET http://localhost:5000/api/getWeatherByID/<id>
+```
 
 #### Update specific user data (based on ID) from MongoDB:
 
