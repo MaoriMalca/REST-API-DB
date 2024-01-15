@@ -96,7 +96,6 @@ routerMod.get('/getWeatherByID/:id', async (req, res) => {
 });
 
 // Update data in database by id(PATCH htpp request)
-// if update email or password - must regsiter again
 routerMod.patch('/updateByID/:id', async (req, res) => {
     try {
         const userToUpdt = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });

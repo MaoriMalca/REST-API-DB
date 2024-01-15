@@ -1,7 +1,7 @@
 const mongooseMod = require('mongoose');
 
 const dataSchema = new mongooseMod.Schema({
-    email: { type: String, uniqe: true, required: true },
+    email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     name: { type: String, required: true },
     age: { type: Number, required: true },

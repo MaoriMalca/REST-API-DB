@@ -152,8 +152,7 @@ Example (on Postman):
 PATCH http://localhost:5000/api/updateByID/<id>
 ```
 Required body params(new data): 
- `name=[string]`
- `age=[number]`
+ `name=[string]` for example
 
 #### Delete specific user data (based on ID) from MongoDB:
 
