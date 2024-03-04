@@ -3,11 +3,11 @@ const mysqlMod = require('mysql');
 require('dotenv').config();
 
 const mysqlConnection = mysqlMod.createConnection({
-  host: process.env.HOST_DB,
-  port: process.env.PORT_DB,
-  user: process.env.USER_DB,
-  password: process.env.PASSWORD_DB,
-  database: process.env.DATABASE_DB
+  host: 'localhost',
+  port: '3306',
+  user: 'maori',
+  password: 'maori753951',
+  database: 'USERS'
 });
 
 // Connect to the database

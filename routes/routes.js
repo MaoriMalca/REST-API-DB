@@ -2,8 +2,6 @@ const expressMod = require('express');
 
 const routerMod = expressMod.Router();
 
-const mysqlConnection = require('../SQLdb/connection');
-
 const queryPromise = require('../SQLdb/queries_handler');
 
 const axiosMod = require('axios');
